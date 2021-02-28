@@ -5,13 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visualizador</title>
-  <script src="/socket.io/socket.io.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <img id="play" src="" alt="">
+  <div class="container">
+    <h2>Transmisión en directo</h2>
+    <div class="videoCentrado">
+      <img id="play" src="" alt="">
+    </div>
+  
+    <p class="center-align">
+      <a class="waves-effect waves-light btn red" id="btn">Captura<i class="material-icons right">add_a_photo</i></a>
+    </p>
+  </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.3.2/sweetalert2.js" charset="utf-8"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script>
     let socket = io();
+    btn.addEventListener('click', () => {
+      
+    });
+    
     socket.on('stream', (image) => {
       let img = document.getElementById('play');
       img.src = image;
