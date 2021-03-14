@@ -18,7 +18,10 @@
       <video src="" id="video" autoplay="true"></video>
     </div>
     <p class="center-align">
-      <a class="waves-effect waves-light btn blue" id=btn>Emitir<i class="material-icons right">videocam</i></a>
+      <a class="waves-effect waves-light btn blue" id="btn">Emitir<i class="material-icons right">videocam</i></a>
+    </p>
+    <p class="center-align">
+      <a class="waves-effect waves-light btn red" id="btn2">Captura<i class="material-icons right">add_a_photo</i></a>
     </p>
     <canvas id="preview"></canvas> <!-- Copia de vídeo que envío al receptor-->
   </div>
@@ -26,62 +29,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.3.2/sweetalert2.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-    let canvas = document.querySelector('#preview');
-    // Pintat imagen de 2D
-    let context  = canvas.getContext('2d');
-    let btn = document.querySelector('#btn');
-    
-    canvas.style.display = 'none';
-    canvas.width = 600;
-    canvas.height = 450;
-
-    context.width =  canvas.width;
-    context.height =  canvas.height;    
-    
-    let socket = io();
-    let img = document.querySelector('#blackScreen');
-    let video = document.querySelector('#video');
-    video.style.display = 'none';
-    
-    function publicarMensaje(status ,title, msg) {
-      swal({
-        type: status,
-        title: title,
-        html: msg,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'Ok!'
-      })
-    }
-
-    function loadWebcam(stream) {
-      video.srcObject = stream;
-      publicarMensaje("success", "Bien hecho", "Se comenzó a transmitir");
-    }
-
-    function erroWebcam() {
-      publicarMensaje("error", "Ups...", "Cámara ha fallado, verifique los permisos de acceso");
-    }
-
-    function verVideo(video, context) {
-      context.drawImage(video, 0, 0, context.width, context.height);
-      socket.emit('stream', canvas.toDataURL('image/jpg'));
-    }
-
-    btn.addEventListener('click', () => {
-      // Obtener datos dependiendo del navegador.
-      video.style.display = 'block';
-      img.style.display = 'none';
-      navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia)
-      if(navigator.getUserMedia) {
-        navigator.getUserMedia({video:true}, loadWebcam, erroWebcam);
-      }
-      let interval = setInterval(() => {
-        verVideo(video,context);
-      }, 50);
-      
-    });
-    
-  </script>
+  <script src="js/emisor.js"></script>
 </body>
 </html>
