@@ -40,6 +40,20 @@ function verVideo(video, context) {
   socket.emit('stream', canvas.toDataURL('image/jpg'));
 }
 
+btn.addEventListener('click', () => {
+  // Obtener datos dependiendo del navegador.
+  video.style.display = 'block';
+  img.style.display = 'none';
+  navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia)
+  if(navigator.getUserMedia) {
+    navigator.getUserMedia({video:true}, loadWebcam, errorWebcam);
+  }
+  let interval = setInterval(() => {
+    verVideo(video,context);
+  }, 0);
+  
+});
+
 btn2.addEventListener('click', async () => {
   const image = canvas.toDataURL('image/jpg');
   const dataImage = JSON.stringify({
@@ -63,17 +77,3 @@ btn2.addEventListener('click', async () => {
 
   
 })
-
-btn.addEventListener('click', () => {
-  // Obtener datos dependiendo del navegador.
-  video.style.display = 'block';
-  img.style.display = 'none';
-  navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia)
-  if(navigator.getUserMedia) {
-    navigator.getUserMedia({video:true}, loadWebcam, errorWebcam);
-  }
-  let interval = setInterval(() => {
-    verVideo(video,context);
-  }, 1000);
-  
-});

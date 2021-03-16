@@ -1,9 +1,9 @@
 const express = require('express'); // Framework de NodeJS que nos permite montar un servidor Web para nuestra aplicación rápidamente.
 const app = express();
-const { writeFile } = require("fs");
-const cors = require("cors"); // Permiso de peticiones.
-const bodyParser = require("body-parser");
-const uniqid = require("uniqid");
+const { writeFile } = require("fs"); // Abstracción de la función writeFile que nos permitirá subir la imagen al server.
+const bodyParser = require("body-parser"); // Middleware para aumentar el tamaño del json a enviar por POST.
+const uniqid = require("uniqid"); // Generar números de id únicos para el nombre de las capturas.
+
 // Configuración del proyecto
 app.set('appName','Webcam Stream Project'); // Nombre del proyecto
 app.set('port', process.env.PORT || 3000); // Si hay un puerto asignado lo pondrá, si no utilizará el 3000.
@@ -11,11 +11,7 @@ app.set('port', process.env.PORT || 3000); // Si hay un puerto asignado lo pondr
 // Creamos un servidor http a partir de la librería de Express
 const http = require('http').Server(app);
 
-
-app.use(cors());// Uso del middleware (permitir acceso a backend a cualquiera).
-
-app.use(bodyParser.json({limit: '10mb', extended: true}))
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
+app.use(bodyParser.json({limit: '10mb'})) // Middleware para permitir un mayor flujo de la información enviada.
 
 // Para generar una comunicación entre el emisor y el receptor, vamos a trabajar con socket.io (Es un Websocket que permite comunicación bidireccional (full duplex)).
 // Usado en Microsoft Office, Trello.
@@ -29,6 +25,7 @@ app.use(express.static(__dirname + "/public"));
 
 // Endpoint para subir la imagen
 app.post("/upload-image", (req, res) => {
+  // Sustituimos el encabezado de descripción para obtener solo el flujo de la imagen.
   let base64Data = req.body.image.replace(/^data:image\/png;base64,/, "");
   let destination = `./src/public/images/${ uniqid() }.png`;
   writeFile(destination, base64Data, 'base64', function(err) {
@@ -56,6 +53,7 @@ io.on('connection', (socket) => {
   });
 });
 
+// Cuando está habilitado el servidor imprimirá un mensaje en consola.
 http.listen(app.get('port'), () => {
   console.log('Servidor en el puerto 3000');
 });
