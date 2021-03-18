@@ -48,8 +48,7 @@ io.on('connection', (socket) => {
   // Habilitamos evento de stream.
   socket.on('stream', (image) => {
     //Enviamos la imagen con el evento stream a todos los sockets conectados.
-    socket.broadcast.emit('stream',image);
-    
+    socket.broadcast.emit('stream',image);    
   });
 });
 

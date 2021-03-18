@@ -1,8 +1,9 @@
 let canvas = document.querySelector('#preview');
 // Pintar imagen de 2D
 let context  = canvas.getContext('2d');
-let btn = document.querySelector('#btn');
-let btn2 = document.querySelector('#btn2');
+let btnEmit = document.querySelector('#btnEmit');
+let btnStop = document.querySelector('#btnStop');
+let btnScreenshot = document.querySelector('#btnScreenshot');
 
 canvas.style.display = 'none';
 canvas.width = 600;
@@ -28,6 +29,9 @@ function publicarMensaje(status ,title, msg) {
 
 function loadWebcam(stream) {
   video.srcObject = stream;
+  btnEmit.classList.add("disabled");
+  btnStop.classList.remove("disabled");
+  btnScreenshot.classList.remove("disabled");
   publicarMensaje("success", "Bien hecho", "Se comenzó a transmitir");
 }
 
@@ -40,7 +44,7 @@ function verVideo(video, context) {
   socket.emit('stream', canvas.toDataURL('image/jpg'));
 }
 
-btn.addEventListener('click', () => {
+btnEmit.addEventListener('click', () => {
   // Obtener datos dependiendo del navegador.
   video.style.display = 'block';
   img.style.display = 'none';
@@ -54,7 +58,13 @@ btn.addEventListener('click', () => {
   
 });
 
-btn2.addEventListener('click', async () => {
+btnStop.addEventListener('click', () => {
+  btnEmit.classList.remove("disabled");
+  btnStop.classList.add("disabled");
+  btnScreenshot.classList.add("disabled");
+});
+
+btnScreenshot.addEventListener('click', async () => {
   const image = canvas.toDataURL('image/jpg');
   const dataImage = JSON.stringify({
     image
