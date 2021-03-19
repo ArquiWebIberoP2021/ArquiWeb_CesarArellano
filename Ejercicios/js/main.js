@@ -172,3 +172,39 @@ const tarea2 = new Tarea("Aprender NodeJS", "Intermedia");
 console.log(tarea1);
 console.log(tarea2);
 
+
+/* forEach  y map */
+
+/* Scope - Alcance*/
+
+var musica2 = "Rock";
+
+if (musica2) {
+  let musica2 = "Jazz"
+  console.log(`Dentro del if ${musica2}`);
+}
+console.log(`El valor de la variable música fuera del if ${musica2}`);
+
+const cliente = {
+  nombreC: "Mariana",
+  tipoC: "Premium",
+  datos: {
+    ubicacion: {
+      ciudad: "México",
+      pais: "México"
+    },
+    cuenta: {
+      desde: "11-04-2020",
+      saldo: 5020
+    }
+  },
+  gustos: {
+    deportes: ["Bicicleta", "Gym", "Baile"]
+  }
+};
+
+let {nombreC, tipoC} = cliente;
+
+console.log(nombreC);
+console.log(tipoC);
+console.log(cliente);

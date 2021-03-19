@@ -12,10 +12,52 @@
 </head>
 <body>
   <div class="container">
-    <h2>Emisión en directo</h2>
+    <h2 class="white-text">Emisión en directo</h2>
     <div class="videoCentrado">
-      <img id="blackScreen" src="assets/blackScreen.jpg" alt="">
-      <video src="" id="video" autoplay="true"></video>
+      <img class="contenidoVisual" id="blackScreen" src="assets/blackScreen.jpg" alt=""> <!-- Utilizando clase contenidoVisual de creada en main.css-->
+      <video class="contenidoVisual" src="" id="video" autoplay="true"></video> <!-- Para que se autoreproduzca el contenido de la cámara-->
+      <div class="preloader-wrapper big active" id="preloader"> <!-- Preloader de materialize -->
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+  
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+  
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+  
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>    
+      
     </div>
     <p class="center-align">
       <a class="waves-effect waves-light btn blue" id="btnEmit">Emitir<i class="material-icons right">videocam</i></a>

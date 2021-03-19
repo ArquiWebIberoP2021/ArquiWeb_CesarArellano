@@ -1,4 +1,5 @@
 let canvas = document.querySelector('#preview');
+let preloader = document.querySelector('#preloader');
 // Pintar imagen de 2D
 let context  = canvas.getContext('2d');
 let btnEmit = document.querySelector('#btnEmit');
@@ -6,6 +7,7 @@ let btnStop = document.querySelector('#btnStop');
 let btnScreenshot = document.querySelector('#btnScreenshot');
 
 canvas.style.display = 'none';
+preloader.style.display = 'none';
 canvas.width = 600;
 canvas.height = 450;
 
@@ -28,6 +30,8 @@ function publicarMensaje(status ,title, msg) {
 }
 
 function loadWebcam(stream) {
+  preloader.style.display = 'none';  
+  video.style.display = 'block';
   video.srcObject = stream;
   btnEmit.classList.add("disabled");
   btnStop.classList.remove("disabled");
@@ -35,21 +39,22 @@ function loadWebcam(stream) {
   publicarMensaje("success", "Bien hecho", "Se comenzó a transmitir");
 }
 
-function errorWebcam() {
+function errorWebcam() {  
+  preloader.style.display = 'none';
   publicarMensaje("error", "Ups...", "Cámara ha fallado, verifique los permisos de acceso");
 }
 
 function verVideo(video, context) {
-  context.drawImage(video, 0, 0, context.width, context.height);
-  socket.emit('stream', canvas.toDataURL('image/jpg'));
+  context.drawImage(video, 0, 0, context.width, context.height); // Redibujamos cada cierto tiempo el canvas.
+  socket.emit('stream', canvas.toDataURL('image/jpg')); // Enviamos las imágenes jpg al receptor por socket.io
 }
 
 btnEmit.addEventListener('click', () => {
   // Obtener datos dependiendo del navegador.
-  video.style.display = 'block';
+  preloader.style.display = 'block';  
   img.style.display = 'none';
   navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia)
-  if(navigator.getUserMedia) {
+  if(navigator.getUserMedia) {    
     navigator.getUserMedia({video:true}, loadWebcam, errorWebcam);
   }
   let interval = setInterval(() => {
@@ -59,6 +64,12 @@ btnEmit.addEventListener('click', () => {
 });
 
 btnStop.addEventListener('click', () => {
+  socket.disconnect();
+  video.srcObject.getTracks()[0].stop(); // Detener flujo
+  video.pause();
+  video.src = "";
+  video.style.display = 'none';
+  img.style.display = 'block';
   btnEmit.classList.remove("disabled");
   btnStop.classList.add("disabled");
   btnScreenshot.classList.add("disabled");

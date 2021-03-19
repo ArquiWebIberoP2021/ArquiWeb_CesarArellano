@@ -1,5 +1,6 @@
 const express = require('express'); // Framework de NodeJS que nos permite montar un servidor Web para nuestra aplicación rápidamente.
 const app = express();
+const path = require('path'); // Para poder trabajar con rutas
 const { writeFile } = require("fs"); // Abstracción de la función writeFile que nos permitirá subir la imagen al server.
 const bodyParser = require("body-parser"); // Middleware para aumentar el tamaño del json a enviar por POST.
 const uniqid = require("uniqid"); // Generar números de id únicos para el nombre de las capturas.
@@ -21,20 +22,20 @@ const io = require('socket.io')(http);
 app.use(require('./routes/webcamStreaming.routes'));
 
 // Indicamos donde vamos a cargar los archivos html con los trabajaremos.
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, '/public'))); // path.join para concatenar la cadena del directorio, ya sea en Windows/Mac/Linux
 
 // Endpoint para subir la imagen
 app.post("/upload-image", (req, res) => {
   // Sustituimos el encabezado de descripción para obtener solo el flujo de la imagen.
   let base64Data = req.body.image.replace(/^data:image\/png;base64,/, "");
-  let destination = `./src/public/images/${ uniqid() }.png`;
-  writeFile(destination, base64Data, 'base64', function(err) {
-    if(err){
+  let destination = `./src/public/images/${ uniqid() }.png`; // Destino de la imagen con nombre único.
+  writeFile(destination, base64Data, 'base64', function(err) { // Escritura de la captura en el servidor con manejador de error.
+    if(err){ // Si hubo error, nos contestará con un ok: false.
       console.log(err);
       res.status(500).json({
         ok: "false"
       })
-    }else{
+    }else{ // Si no hubo error, nos contestará con un ok: true.
       res.status(200).json({
         ok: "true"
       })
