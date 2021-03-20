@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 3000); // Si hay un puerto asignado lo pondr
 // Creamos un servidor http a partir de la librería de Express
 const http = require('http').Server(app);
 
-app.use(bodyParser.json({limit: '10mb'})) // Middleware para permitir un mayor flujo de la información enviada.
+app.use(bodyParser.json({limit: '2mb'})) // Middleware para permitir un mayor flujo de la información enviada.
 
 // Para generar una comunicación entre el emisor y el receptor, vamos a trabajar con socket.io (Es un Websocket que permite comunicación bidireccional (full duplex)).
 // Usado en Microsoft Office, Trello.

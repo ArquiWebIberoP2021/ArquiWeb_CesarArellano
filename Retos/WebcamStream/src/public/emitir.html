@@ -5,16 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Emisión vídeo</title>
+  <link rel="shortcut icon" href="assets/iconWebcam.png"> <!--icono de la pestaña-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   <!-- Iconos Materialize-->
+  <link rel="stylesheet" href="css/animate.min.css"/>  <!-- Animaciones FadeIn-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.3.2/sweetalert2.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <div class="container">
-    <h2 class="white-text">Emisión en directo</h2>
+    <h2 class="animate__animated animate__fadeIn white-text">Emisión en directo</h2>
     <div class="videoCentrado">
-      <img class="contenidoVisual" id="blackScreen" src="assets/blackScreen.jpg" alt=""> <!-- Utilizando clase contenidoVisual de creada en main.css-->
+      <img class="animate__animated animate__fadeIn animate__delay-1s contenidoVisual" id="blackScreen" src="assets/blackScreen.jpg" alt=""> <!-- Utilizando clase contenidoVisual de creada en main.css-->
       <video class="contenidoVisual" src="" id="video" autoplay="true"></video> <!-- Para que se autoreproduzca el contenido de la cámara-->
       <div class="preloader-wrapper big active" id="preloader"> <!-- Preloader de materialize -->
         <div class="spinner-layer spinner-blue">

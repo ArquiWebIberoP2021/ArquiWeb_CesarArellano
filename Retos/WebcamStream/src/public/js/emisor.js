@@ -59,7 +59,7 @@ btnEmit.addEventListener('click', () => {
   }
   let interval = setInterval(() => {
     verVideo(video,context);
-  }, 0);
+  }, 75);
   
 });
 
