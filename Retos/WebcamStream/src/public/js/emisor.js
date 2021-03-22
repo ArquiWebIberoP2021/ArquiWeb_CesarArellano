@@ -51,6 +51,7 @@ function verVideo(video, context) {
 
 btnEmit.addEventListener('click', () => {
   // Obtener datos dependiendo del navegador.
+  video.autoplay = true;
   preloader.style.display = 'block';  
   img.style.display = 'none';
   navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia)
