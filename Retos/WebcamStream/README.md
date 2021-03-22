@@ -31,5 +31,5 @@ Para correr la plataforma ejecute el comando 'npm run dev' y en su navegador col
 
 ## Autores ✒️
 
-* **César Arellano** - *Funcionalidad Web y Diseño* - [CesarArellano](https://github.com/CesarArellano)
+* **César Arellano** - *Funcionalidad y Diseño Web* - [CesarArellano](https://github.com/CesarArellano)
 * **Jair Escamilla** - *API REST para subir imágenes* - [JairEscamilla](https://github.com/JairEscamilla)

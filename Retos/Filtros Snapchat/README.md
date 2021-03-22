@@ -29,4 +29,3 @@ Para correr la plataforma con LiveServer con el archivo index.html abierto o con
 ## Autores ✒️
 
 * **César Arellano** - *Funcionalidad y Diseño Web* - [CesarArellano](https://github.com/CesarArellano)
-_Reto materia de arquitectura de información en web - IBERO CDMX_
