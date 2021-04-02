@@ -203,8 +203,88 @@ const cliente = {
   }
 };
 
-let {nombreC, tipoC} = cliente;
+let {nombreC, tipoC } = cliente;
 
 console.log(nombreC);
 console.log(tipoC);
 console.log(cliente);
+
+let {datos: {cuenta: {saldo} } } = cliente;
+
+console.log(saldo);
+
+/* Object literal enhacement: Se usa para unir un objeto*/
+
+const banda = "Metallica",
+      genero = "Heavy Metal",
+      canciones = ["Master of Puppets","Seek & Destroy", "Enter Sandman"];
+
+
+/** Realizar ejemplos sobre
+  * Filter
+  * Find
+  * Reduce
+*/
+
+const array = [5, 12, 8, 130, 44];
+
+const found = array.find(element => element > 10);
+
+console.log(found);
+
+const personas = [
+  {nombre: 'Antonio', edad: 41},
+  {nombre: 'César', edad: 21},
+  {nombre: 'Mariana', edad: 20},
+  {nombre: 'Steve', edad: 23, aprendiendo: "JavaScript"},
+  {nombre: 'Jair', edad: 22},
+]
+
+console.log(personas);
+
+/* Personas mayores a 21 años */
+
+const mayores = personas.filter( persona => persona.edad > 21);
+
+console.log(mayores);
+
+/* Extraer info. de Mariana */
+
+const mariana = personas.find(persona => persona.nombre === "Mariana")
+console.log(mariana);
+
+/* Obtiene un acumulado de los registros */
+let totalPersonas = personas.reduce((edadTotal,persona) => {
+  return edadTotal+ persona.edad;
+},0);
+
+console.log(totalPersonas);
+console.log(totalPersonas / personas.length);
+
+function descargarUsuarios(cantidad) {
+  const api = `https://api.randomuser.me/?nat=US&results=${cantidad}`;
+  fetch(api)
+    .then(respuesta => respuesta.json())
+    .then(datos => {
+      console.log(datos.results);
+      imprimirHTML(datos.results);
+    })
+    .catch(err => console.log(err));
+}
+
+descargarUsuarios(20);
+
+function imprimirHTML(datos) {
+  datos.forEach(usuario => {
+    const li = document.createElement("li");
+    const {name:{first}, name:{last}, picture: {large}, nat } = usuario;
+    
+    li.innerHTML = `
+      Nombre: ${first} ${last}
+      País: ${nat},
+      Imagen <img src="${large}">
+    `;
+
+    document.querySelector('#app').appendChild(li);
+  });
+}
