@@ -26,7 +26,6 @@ class AudioMixer {
 
 }
 
-
 // Creamos una clase fachada para esconder la complejidad del
 // framework tras una interfaz simple. Es una solución de
 // equilibrio entre funcionalidad y simplicidad.

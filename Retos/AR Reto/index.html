@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Realidad Aumentada</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+</head>
+<body> 
+  <div class="container">
+    <button class="button" id="btn1">Play Sound</button>
+    <button class="button" id="btn2">Stop Sound</button>
+    <button class="button" id="btn3">Stop Video</button>
+    <button class="button" id="btn4">Play Video</button>
+  </div>
+
+  <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">
+
+    <a-marker preset="hiro">
+    <video id="mivideo" crossOrigin="anonymous" playsinline webkitplaysinline autoplay controls muted src="assets/videos/parcels.mp4"></video>
+    <a-video src="#mivideo" position="0 0 0" scale="3 2 2" rotation="270 0 0" ></a-video>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+
+
