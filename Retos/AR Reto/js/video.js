@@ -1,5 +1,5 @@
 // References
-const  marker = document.querySelector("a-marker");
+const marker = document.querySelector("a-marker");
 const video = document.querySelector('#mivideo');
 const btn1 = document.querySelector("#btn1");
 const btn2 = document.querySelector("#btn2");
