@@ -18,12 +18,10 @@
     <button class="button" id="btn3">Stop Video</button>
     <button class="button" id="btn4">Play Video</button>
   </div>
-
   <a-scene class="aframebox" embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">
-
     <a-marker preset="hiro">
     <video id="mivideo" crossOrigin="anonymous" playsinline webkitplaysinline autoplay controls muted src="assets/videos/parcels.mp4"></video>
-    <a-video src="#mivideo" position="0 0 0" scale="3 2 2" rotation="270 0 0" ></a-video>
+    <a-video src="#mivideo" position="0 0 0" scale="2 1.5 1.5" rotation="270 0 0" ></a-video>
     </a-marker>
     <a-entity camera="active: true"> </a-entity>
   </a-scene>
